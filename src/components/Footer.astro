@@ -1,0 +1,5 @@
+---
+import {site,text} from '../lib/settings';
+const year=new Intl.DateTimeFormat('en',{year:'numeric',timeZone:site.timezone}).format(new Date());
+---
+<footer class="site-footer"><div><a class="footer-wordmark" href="/">{site.author}<span>.</span></a><p>{site.footer}</p></div><div class="footer-meta"><span>© {site.startYear===Number(year)?year:`${site.startYear}–${year}`} {site.author}</span><span class="mono">{text.footer.note}</span>{import.meta.env.DEV&&import.meta.env.LOCAL_TEXT_EDITOR_AVAILABLE&&<a href="/__editor/" target="_blank">编辑页面文字 ↗</a>}</div></footer>

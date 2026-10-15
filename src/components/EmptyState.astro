@@ -1,0 +1,6 @@
+---
+import Icon from './Icon.astro';
+interface Props {title:string;description:string;icon?:string}
+const {title,description,icon='link'}=Astro.props;
+---
+<div class="empty-state"><div class="empty-icon"><Icon name={icon} size={32}/></div><h2>{title}</h2><p>{description}</p></div>

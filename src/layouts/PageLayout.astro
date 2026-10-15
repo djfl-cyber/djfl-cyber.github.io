@@ -1,0 +1,6 @@
+---
+import BaseLayout from './BaseLayout.astro';
+interface Props {title:string;eyebrow:string;description:string;noindex?:boolean}
+const {title,eyebrow,description,noindex}=Astro.props;
+---
+<BaseLayout title={title} description={description} noindex={noindex}><div class="page-shell interior-page"><header class="page-intro"><p class="eyebrow"><span class="tiny-rule"/>{eyebrow}</p><h1>{title}</h1><p>{description}</p></header><slot/></div></BaseLayout>

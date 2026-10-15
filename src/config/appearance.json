@@ -1,0 +1,16 @@
+{
+  "defaultTheme": "light",
+  "accent": "#267565",
+  "accentDark": "#8bcdb3",
+  "background": "#f5f4ef",
+  "backgroundImage": "",
+  "backgroundOverlay": 0.9,
+  "decorations": true,
+  "contentWidth": 1160,
+  "articleWidth": 790,
+  "sidebarWidth": 264,
+  "gap": 40,
+  "radius": 16,
+  "fontSize": 16,
+  "fontFamily": "Inter, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif"
+}

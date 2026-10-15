@@ -1,0 +1,10 @@
+---
+import type {MarkdownHeading} from 'astro';
+import Icon from './Icon.astro';
+interface Props {headings:MarkdownHeading[]}
+const {headings}=Astro.props;
+const baseDepth=Math.min(...headings.map(h=>h.depth),1);
+---
+<nav class="toc" aria-label="文章目录" data-toc>
+  <ol>{headings.map((heading,index)=><li data-depth={heading.depth} style={`--depth:${Math.min(heading.depth-baseDepth,3)}`}><div class="toc-row">{headings[index+1]?.depth>heading.depth?<button data-toc-toggle aria-expanded="true" aria-label={`折叠 ${heading.text} 的子目录`}><Icon name="chevron" size={12}/></button>:<span class="toc-spacer"/>}<a href={`#${encodeURIComponent(heading.slug)}`} data-heading={heading.slug}>{heading.text}</a></div></li>)}</ol>
+</nav>

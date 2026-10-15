@@ -1,0 +1,16 @@
+---
+import {menu,site,text} from '../lib/settings';
+import Icon from './Icon.astro';
+const current=decodeURI(Astro.url.pathname);
+---
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label={`${site.title} 首页`}><span class="brand-mark">{text.header.mark}<span>.</span></span><span>{site.author}<span class="brand-dot">.</span><small>{text.header.tagline}</small></span></a>
+    <nav class="desktop-nav" aria-label="主导航">{menu.map(item=><a href={item.href} aria-current={(item.href==='/'?current==='/':current.startsWith(item.href))?'page':undefined}>{item.label}</a>)}</nav>
+    <div class="header-actions">
+      <button class="icon-button theme-toggle" data-theme-toggle aria-label="切换为深色主题" title="切换主题"><Icon name="sun" class="theme-sun"/><Icon name="moon" class="theme-moon"/></button>
+      <button class="icon-button mobile-menu-toggle" data-menu-toggle aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobile-menu"><Icon name="menu"/></button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-menu" aria-label="移动导航" hidden>{menu.map(item=><a href={item.href} aria-current={(item.href==='/'?current==='/':current.startsWith(item.href))?'page':undefined}>{item.label}<Icon name="arrow" size={16}/></a>)}</nav>
+</header>

@@ -1,0 +1,9 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {text} from '../../lib/settings';
+import PostCard from '../../components/PostCard.astro';
+import {getPosts,allTerms} from '../../lib/content';
+export async function getStaticPaths(){const posts=await getPosts();return[undefined,...allTerms(posts,'categories')].map(term=>({params:{term},props:{term}}));}
+const {term}=Astro.props;const posts=await getPosts();const terms=allTerms(posts,'categories');
+---
+<PageLayout title={term??text.categories.title} eyebrow={text.categories.eyebrow} description={text.categories.description}>{term?<div class="post-list">{posts.filter(p=>p.data.categories.includes(term)).map((post,index)=><PostCard post={post} index={index}/>)}</div>:<div class="filter-chips">{terms.length?terms.map(t=><a href={`/categories/${encodeURIComponent(t)}/`}>{t}</a>):<p class="muted">{text.categories.empty}</p>}</div>}</PageLayout>

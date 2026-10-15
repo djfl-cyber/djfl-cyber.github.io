@@ -1,0 +1,13 @@
+{
+  "title": "djfl's blog",
+  "author": "djfl",
+  "description": "想到啥写啥",
+  "site": "https://djfl-cyber.github.io",
+  "language": "zh-CN",
+  "timezone": "Asia/Shanghai",
+  "startYear": 2026,
+  "footer": "保持好奇，慢慢记录。",
+  "authorBio": "在代码与日常之间，收集问题，也记录答案。",
+  "about": "这里是 djfl 的个人博客。记录 CTF 题解、学习笔记，以及探索过程中值得留下的东西。想到什么，就写下什么。",
+  "github": "https://github.com/djfl-cyber"
+}

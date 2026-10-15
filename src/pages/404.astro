@@ -1,0 +1,6 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import {pages,text} from '../lib/settings';
+import Icon from '../components/Icon.astro';
+---
+<PageLayout {...pages.notFound} noindex><div class="error-actions"><a class="primary-link" href="/">{text.notFound.homeLink}<Icon name="arrow" size={18}/></a><a class="text-link" href="/archives/">{text.notFound.archiveLink}</a></div></PageLayout>

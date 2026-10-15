@@ -1,0 +1,7 @@
+{
+  "archives": { "eyebrow": "THE ARCHIVE", "title": "记录的轨迹", "description": "把零散的思考，沿时间收好。" },
+  "friends": { "eyebrow": "FRIENDS & NEIGHBORS", "title": "网络里的邻居", "description": "与有趣的人交换想法，让好奇心相互串门。", "empty": "这里为朋友们留了位置。", "emptyDetail": "下一次相遇，也许就从一个链接开始。" },
+  "navigation": { "eyebrow": "A SMALL DIRECTORY", "title": "常去的地方", "description": "收好常用的网站，给每一次探索一个起点。", "empty": "书签正在慢慢积攒。", "emptyDetail": "好用的工具和喜欢的网站，都会在这里有个位置。", "noResults": "没有找到匹配的网站，换个关键词试试。", "searchPlaceholder": "搜索名称、介绍或分类…" },
+  "about": { "eyebrow": "BEHIND THE NOTES", "title": "你好，我是 djfl。", "description": "一个保持好奇的人，和一个慢慢生长的博客。" },
+  "notFound": { "eyebrow": "404 / A LITTLE DETOUR", "title": "这页笔记，暂时不在这里。", "description": "可能是地址有误，也可能是路过了一个还没写完的角落。" }
+}

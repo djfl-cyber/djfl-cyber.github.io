@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.astro/
+.cache/
+public/img/
+scripts/artifacts/
+# Local workbench: keep its source, tests and launcher on this computer.
+/scripts/editor/
+/scripts/edit.mjs
+/scripts/tests/editor.test.mjs
+.env
+.env.*
+!.env.example

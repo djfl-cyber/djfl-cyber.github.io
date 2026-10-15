@@ -1,0 +1,15 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import {getPosts,dateParts,dateLabel,type Post} from '../../lib/content';
+import {pages,text} from '../../lib/settings';
+import Icon from '../../components/Icon.astro';
+export async function getStaticPaths(){const posts=await getPosts();const periods=new Set(posts.flatMap(p=>{const d=dateParts(p.data.date);return[d.year,`${d.year}/${d.month}`]}));return[undefined,...periods].map(period=>({params:{period},props:{period}}));}
+const {period}=Astro.props;
+const all=await getPosts();
+const posts=all.filter(p=>{const d=dateParts(p.data.date);return !period||`${d.year}/${d.month}`.startsWith(period)});
+const years=Object.entries(posts.reduce<Record<string,Post[]>>((groups,post)=>{const y=dateParts(post.data.date).year;(groups[y]??=[]).push(post);return groups;},{})).sort(([a],[b])=>b.localeCompare(a));
+---
+<PageLayout {...pages.archives}>
+  <div class="archive-summary"><span>{text.archive.totalPrefix} <strong>{posts.length}</strong> {text.archive.countUnit}{period&&` · ${period.replace('/',' 年 ')}${period.includes('/')?' 月':' 年'}`}</span>{period&&<a class="text-link" href="/archives/">{text.archive.all}<Icon name="arrow" size={16}/></a>}</div>
+  <div class="archive-list">{years.map(([year,entries])=><section class="archive-year"><h2 class="mono">{year}<small>{entries.length} {text.archive.yearCountUnit}</small></h2><div>{entries.map(post=><a class="archive-row" href={post.data.permalink}><time datetime={post.data.date.toISOString()}>{dateLabel(post.data.date).slice(5)}</time><span>{post.data.title}</span><Icon name="diagonal" size={17}/></a>)}</div></section>)}</div>
+</PageLayout>

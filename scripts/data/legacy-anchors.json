@@ -1,0 +1,311 @@
+{
+  "TSCTF-J2026-WP": [
+    {
+      "depth": 1,
+      "text": "TSCTF-J 题解",
+      "id": "TSCTF-J-题解"
+    },
+    {
+      "depth": 2,
+      "text": "Misc",
+      "id": "Misc"
+    },
+    {
+      "depth": 3,
+      "text": "PlayIt",
+      "id": "PlayIt"
+    },
+    {
+      "depth": 3,
+      "text": "FindIt",
+      "id": "FindIt"
+    },
+    {
+      "depth": 3,
+      "text": "フラグの恋",
+      "id": "フラグの恋"
+    },
+    {
+      "depth": 3,
+      "text": "文字的秘密",
+      "id": "文字的秘密"
+    },
+    {
+      "depth": 3,
+      "text": "!?MisC?!",
+      "id": "MisC"
+    },
+    {
+      "depth": 2,
+      "text": "AI",
+      "id": "AI"
+    },
+    {
+      "depth": 3,
+      "text": "Liar’s Bar",
+      "id": "Liar’s-Bar"
+    }
+  ],
+  "moectf2026解题记录": [
+    {
+      "depth": 1,
+      "text": "moectf2026解题记录",
+      "id": "moectf2026解题记录"
+    },
+    {
+      "depth": 2,
+      "text": "碎碎念",
+      "id": "碎碎念"
+    },
+    {
+      "depth": 2,
+      "text": "霜雪千年",
+      "id": "霜雪千年"
+    },
+    {
+      "depth": 2,
+      "text": "Can_you_find_it?",
+      "id": "Can-you-find-it"
+    },
+    {
+      "depth": 2,
+      "text": "ez_BASE_revenge",
+      "id": "ez-BASE-revenge"
+    },
+    {
+      "depth": 3,
+      "text": "关于这四种编码",
+      "id": "关于这四种编码"
+    },
+    {
+      "depth": 2,
+      "text": "一部电台",
+      "id": "一部电台"
+    },
+    {
+      "depth": 3,
+      "text": "吐槽",
+      "id": "吐槽"
+    },
+    {
+      "depth": 3,
+      "text": "解题过程",
+      "id": "解题过程"
+    },
+    {
+      "depth": 2,
+      "text": "基米文件",
+      "id": "基米文件"
+    }
+  ],
+  "入门MySQL": [
+    {
+      "depth": 1,
+      "text": "关于MySQL",
+      "id": "关于MySQL"
+    },
+    {
+      "depth": 2,
+      "text": "什么是数据库",
+      "id": "什么是数据库"
+    },
+    {
+      "depth": 2,
+      "text": "RDBMS术语",
+      "id": "RDBMS术语"
+    },
+    {
+      "depth": 1,
+      "text": "MySQL基本的增删改查",
+      "id": "MySQL基本的增删改查"
+    },
+    {
+      "depth": 2,
+      "text": "对数据库",
+      "id": "对数据库"
+    },
+    {
+      "depth": 2,
+      "text": "对表格",
+      "id": "对表格"
+    },
+    {
+      "depth": 2,
+      "text": "对数据",
+      "id": "对数据"
+    }
+  ],
+  "基本的盲注": [
+    {
+      "depth": 1,
+      "text": "sqli-labs五到八关——基本的布尔盲注流程及其脚本",
+      "id": "sqli-labs五到八关——基本的布尔盲注流程及其脚本"
+    },
+    {
+      "depth": 2,
+      "text": "关于布尔盲注",
+      "id": "关于布尔盲注"
+    },
+    {
+      "depth": 2,
+      "text": "Less-5",
+      "id": "Less-5"
+    },
+    {
+      "depth": 3,
+      "text": "limit",
+      "id": "limit"
+    },
+    {
+      "depth": 3,
+      "text": "group_concat",
+      "id": "group-concat"
+    },
+    {
+      "depth": 3,
+      "text": "脚本",
+      "id": "脚本"
+    },
+    {
+      "depth": 2,
+      "text": "Less-6",
+      "id": "Less-6"
+    },
+    {
+      "depth": 2,
+      "text": "Less-7",
+      "id": "Less-7"
+    },
+    {
+      "depth": 2,
+      "text": "Less-8",
+      "id": "Less-8"
+    }
+  ],
+  "文件上传漏洞": [
+    {
+      "depth": 1,
+      "text": "叠甲",
+      "id": "叠甲"
+    },
+    {
+      "depth": 1,
+      "text": "什么是文件上传漏洞",
+      "id": "什么是文件上传漏洞"
+    },
+    {
+      "depth": 1,
+      "text": "常见的漏洞类型",
+      "id": "常见的漏洞类型"
+    },
+    {
+      "depth": 2,
+      "text": "文件类型验证漏洞",
+      "id": "文件类型验证漏洞"
+    },
+    {
+      "depth": 2,
+      "text": "文件内容验证漏洞",
+      "id": "文件内容验证漏洞"
+    },
+    {
+      "depth": 2,
+      "text": "防止用户在可访问目录中执行文件",
+      "id": "防止用户在可访问目录中执行文件"
+    },
+    {
+      "depth": 2,
+      "text": "黑名单缺陷",
+      "id": "黑名单缺陷"
+    },
+    {
+      "depth": 3,
+      "text": "覆盖配置文件",
+      "id": "覆盖配置文件"
+    },
+    {
+      "depth": 3,
+      "text": "混淆扩展名",
+      "id": "混淆扩展名"
+    }
+  ],
+  "最基本的MySQL注入流程": [
+    {
+      "depth": 1,
+      "text": "sqli-labs一到四关——最基本的注入流程",
+      "id": "sqli-labs一到四关——最基本的注入流程"
+    },
+    {
+      "depth": 2,
+      "text": "关于URL",
+      "id": "关于URL"
+    },
+    {
+      "depth": 2,
+      "text": "基本闭合方式",
+      "id": "基本闭合方式"
+    },
+    {
+      "depth": 2,
+      "text": "Less-1",
+      "id": "Less-1"
+    },
+    {
+      "depth": 2,
+      "text": "Less-2",
+      "id": "Less-2"
+    },
+    {
+      "depth": 2,
+      "text": "Less-3",
+      "id": "Less-3"
+    },
+    {
+      "depth": 2,
+      "text": "Less-4",
+      "id": "Less-4"
+    }
+  ],
+  "路径遍历攻击": [
+    {
+      "depth": 1,
+      "text": "路径遍历攻击",
+      "id": "路径遍历攻击"
+    },
+    {
+      "depth": 2,
+      "text": "什么是路径遍历攻击",
+      "id": "什么是路径遍历攻击"
+    },
+    {
+      "depth": 2,
+      "text": "路径遍历实例",
+      "id": "路径遍历实例"
+    },
+    {
+      "depth": 3,
+      "text": "无防护",
+      "id": "无防护"
+    },
+    {
+      "depth": 3,
+      "text": "绝对路径",
+      "id": "绝对路径"
+    },
+    {
+      "depth": 3,
+      "text": "非递归剥离的路径遍历",
+      "id": "非递归剥离的路径遍历"
+    },
+    {
+      "depth": 3,
+      "text": "编码",
+      "id": "编码"
+    },
+    {
+      "depth": 3,
+      "text": "空字节绕过",
+      "id": "空字节绕过"
+    }
+  ]
+}

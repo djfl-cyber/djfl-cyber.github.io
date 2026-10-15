@@ -1,0 +1,27 @@
+---
+import type {MarkdownHeading} from 'astro';
+import BaseLayout from './BaseLayout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import Icon from '../components/Icon.astro';
+import {text} from '../lib/settings';
+import {dateLabel,readingTime,excerpt,type Post} from '../lib/content';
+interface Props {post:Post;headings:MarkdownHeading[];previous?:Post;next?:Post}
+const {post,headings,previous,next}=Astro.props;
+const showToc=post.data.toc&&headings.length>0;
+---
+<BaseLayout title={post.data.title} description={excerpt(post)} canonical={post.data.permalink} article noindex={post.data.draft}>
+  <div class="reading-progress" data-reading-progress aria-hidden="true"/>
+  <div class="page-shell post-page">
+    <a href="/archives/" class="back-link"><span>←</span> {text.article.back}</a>
+    <div class:list={['article-grid',{'no-toc':!showToc}]}>
+      <div class="article-main">
+        <header class="article-header"><div class="eyebrow">{text.article.eyebrow} / {post.data.categories[0]??text.article.fallbackCategory}</div><h1>{post.data.title}</h1><div class="post-meta"><time datetime={post.data.date.toISOString()}>{dateLabel(post.data.date)}</time><span class="meta-dot"/><span>{readingTime(post)} {text.article.readingUnit}</span>{post.data.updated&&<span>{text.article.updated} {dateLabel(post.data.updated)}</span>}{post.data.draft&&<span class="draft-badge">{text.article.draftPreview}</span>}</div>{post.data.tags.length>0&&<div class="article-tags">{post.data.tags.map(tag=><a class="tag" href={`/tags/${encodeURIComponent(tag)}/`}>#{tag}</a>)}</div>}</header>
+        <article class="prose" id="article-content" data-article><slot/></article>
+        <div class="article-end"><span>✳</span><p>{text.article.thanks}</p><a href="#main">{text.article.backTop}</a></div>
+        <nav class="adjacent-posts" aria-label="相邻文章">{previous?<a href={previous.data.permalink}><span>{text.article.newer}</span><strong>{previous.data.title}</strong></a>:<div/>}{next?<a href={next.data.permalink}><span>{text.article.older}</span><strong>{next.data.title}</strong></a>:<div/>}</nav>
+      </div>
+      {showToc&&<aside class="post-toc"><div class="toc-heading"><span class="eyebrow">{text.article.tocEyebrow}</span><span class="mono" data-reading-percent>0%</span></div><h2>{text.article.toc}</h2><TableOfContents headings={headings}/></aside>}
+    </div>
+    {showToc&&<><button class="mobile-toc-button" data-open-toc><Icon name="list" size={18}/>{text.article.toc}</button><dialog class="toc-dialog" data-toc-dialog><div class="dialog-heading"><h2>{text.article.toc}</h2><button class="icon-button" data-close-toc aria-label="关闭目录"><Icon name="close"/></button></div><TableOfContents headings={headings}/></dialog></>}
+  </div>
+</BaseLayout>

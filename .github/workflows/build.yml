@@ -1,0 +1,52 @@
+name: Check and build blog
+on:
+  push:
+    branches: [main, source]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Deploy this build to GitHub Pages
+        type: boolean
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: blog-${{ github.ref }}
+  cancel-in-progress: true
+env:
+  ASTRO_TELEMETRY_DISABLED: '1'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.12.0'
+          cache: npm
+      - run: npm ci
+      - run: npm run test
+      - run: npm run check:content
+      - run: npm run check
+      - name: Build blog and reject local workbench files
+        run: npm run build
+      - run: npm run check:links
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          # The checked static blog output is the only deployment artifact.
+          path: dist
+  deploy:
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

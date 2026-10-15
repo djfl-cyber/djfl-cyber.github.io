@@ -1,0 +1,7 @@
+{
+  "folders": [{ "path": "." }],
+  "settings": {
+    "markdown.copyFiles.destination": { "/src/content/posts/**/*": "img/" },
+    "markdown.validate.enabled": true
+  }
+}
