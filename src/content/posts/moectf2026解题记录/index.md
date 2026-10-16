@@ -1,5 +1,5 @@
 ---
-title: "'moectf2026解题记录'"
+title: "moectf2026解题记录"
 date: 2026-09-06T17:13:12+08:00
 tags: []
 categories: []
