@@ -55,8 +55,8 @@
       },
       {
         "id": "about-content",
-        "type": "content",
-        "name": "动态页面内容"
+        "type": "profile",
+        "name": "个人介绍"
       }
     ]
   }

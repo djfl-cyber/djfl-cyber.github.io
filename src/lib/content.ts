@@ -1,8 +1,10 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { site } from './settings';
+import { previewOptions } from 'virtual:blog-layout-preview';
 export type Post = CollectionEntry<'posts'>;
-export async function getPosts() {
-  const posts = await getCollection('posts', p=>import.meta.env.DEV || !p.data.draft);
+export async function getPosts(request?:Request) {
+  const includeDrafts=request?(previewOptions(request)?.includeDrafts??import.meta.env.DEV):import.meta.env.DEV;
+  const posts = await getCollection('posts', p=>includeDrafts || !p.data.draft);
   const routes = new Set<string>();
   for (const post of posts) {
     const route=decodeURIComponent(post.data.permalink);

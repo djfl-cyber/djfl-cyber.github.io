@@ -5,7 +5,7 @@ import {pages,text} from '../../lib/settings';
 import Icon from '../../components/Icon.astro';
 export async function getStaticPaths(){const posts=await getPosts();const periods=new Set(posts.flatMap(p=>{const d=dateParts(p.data.date);return[d.year,`${d.year}/${d.month}`]}));return[undefined,...periods].map(period=>({params:{period},props:{period}}));}
 const {period}=Astro.props;
-const all=await getPosts();
+const all=await getPosts(Astro.request);
 const posts=all.filter(p=>{const d=dateParts(p.data.date);return !period||`${d.year}/${d.month}`.startsWith(period)});
 const years=Object.entries(posts.reduce<Record<string,Post[]>>((groups,post)=>{const y=dateParts(post.data.date).year;(groups[y]??=[]).push(post);return groups;},{})).sort(([a],[b])=>b.localeCompare(a));
 ---

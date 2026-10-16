@@ -1,7 +1,8 @@
 ---
+import MultilineText from './MultilineText.astro';
 import * as defaults from '../lib/settings';
 const {nodeAttrs={},settings=defaults}=Astro.props;
 const {site,text}=settings;
 const year=new Intl.DateTimeFormat('en',{year:'numeric',timeZone:site.timezone}).format(new Date());
 ---
-<footer class="site-footer" {...nodeAttrs}><div><a class="footer-wordmark" href="/">{site.author}<span>.</span></a><p>{site.footer}</p></div><div class="footer-meta"><span>© {site.startYear===Number(year)?year:`${site.startYear}–${year}`} {site.author}</span><span class="mono">{text.footer.note}</span></div></footer>
+<footer class="site-footer" {...nodeAttrs}><div><a class="footer-wordmark" href="/"><MultilineText value={site.author}/><span>.</span></a><p><MultilineText value={site.footer}/></p></div><div class="footer-meta"><span>© {site.startYear===Number(year)?year:`${site.startYear}–${year}`} <MultilineText value={site.author}/></span><span class="mono"><MultilineText value={text.footer.note}/></span></div></footer>

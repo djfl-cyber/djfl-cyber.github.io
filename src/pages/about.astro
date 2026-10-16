@@ -1,8 +1,7 @@
 ---
-import {Image} from 'astro:assets';
-import avatar from '../assets/legacy/head.jpg';
 import PageLayout from '../layouts/PageLayout.astro';
-import {site,pages} from '../lib/settings';
-import Icon from '../components/Icon.astro';
+import ProfileCard from '../components/ProfileCard.astro';
+import {layout} from '../lib/layouts';
+const page=await layout('about',Astro.request);
 ---
-<PageLayout {...pages.about}><section class="about-card">{site.avatar?<img src={site.avatar} width="120" height="120" alt={`${site.author} 的头像`} class="about-avatar"/>:<Image src={avatar} width={120} height={120} format="webp" alt={`${site.author} 的头像`} class="about-avatar"/>}<div><h2>{site.author}<span class="accent">.</span></h2><p>{site.about}</p><a class="text-link" href={site.github} target="_blank" rel="noopener noreferrer"><Icon name="github" size={18}/>GitHub<Icon name="diagonal" size={15}/></a></div></section></PageLayout>
+<PageLayout {...page.settings.pages.about}><ProfileCard settings={page.settings}/></PageLayout>

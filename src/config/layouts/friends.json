@@ -55,8 +55,11 @@
       },
       {
         "id": "friends-content",
-        "type": "content",
-        "name": "动态页面内容"
+        "type": "directory",
+        "name": "友链列表",
+        "props": {
+          "source": "friends"
+        }
       }
     ]
   }

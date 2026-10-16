@@ -4,6 +4,7 @@ export interface LayoutNode {id:string;type:string;name?:string;props?:Record<st
 export interface PageDocument {schemaVersion:1;id:string;title:string;route:string;scope?:string;breakpoints?:{mobile:number;desktop:number};root:LayoutNode}
 export const SCHEMA_VERSION:1;
 export const nodeTypes:string[];
+export function componentKind(node:LayoutNode):string;
 export const styleKeys:string[];
 export function safeUrl(value:unknown):boolean;
 export function validatePage(document:unknown):PageDocument;

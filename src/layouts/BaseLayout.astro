@@ -11,7 +11,7 @@ interface Props {title?:string;description?:string;canonical?:string;article?:bo
 const {title,description=site.description,canonical=Astro.url.pathname,article=false,noindex=false}=Astro.props;
 const fullTitle=title?`${title} · ${site.title}`:site.title;
 const canonicalUrl=new URL(canonical,site.site).href;
-const headerLayout=await layout('header');const footerLayout=await layout('footer');
+const headerLayout=await layout('header',Astro.request);const footerLayout=await layout('footer',Astro.request);
 ---
 <!doctype html>
 <html lang={site.language} data-theme={appearance.defaultTheme==='dark'?'dark':'light'} data-decorations={String(appearance.decorations)} style={themeVariables}>

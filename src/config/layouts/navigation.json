@@ -55,8 +55,11 @@
       },
       {
         "id": "navigation-content",
-        "type": "content",
-        "name": "动态页面内容"
+        "type": "directory",
+        "name": "导航列表",
+        "props": {
+          "source": "navigation"
+        }
       }
     ]
   }

@@ -1,0 +1,22 @@
+---
+import EmptyState from './EmptyState.astro';
+import Icon from './Icon.astro';
+import MultilineText from './MultilineText.astro';
+import {directoryEntries,directoryTemplates,type DirectorySource} from '../lib/directory-model.mjs';
+interface Props {source:DirectorySource;settings:any;nodeAttrs?:Record<string,string>;className?:string}
+const {source,settings,nodeAttrs={},className}=Astro.props;
+const items=directoryEntries(settings,source),spec=directoryTemplates[source];
+const categories=[...new Set(items.map(item=>item.category))];
+const copy=settings.pages[source];
+---
+<div {...nodeAttrs} class={className} data-directory-source={source}>
+  {items.length===0?<EmptyState title={copy.empty} description={copy.emptyDetail} icon={spec.grouped?'link':'compass'}/>:spec.grouped?
+    categories.map(category=><section class="directory-section"><h2>{category}</h2><div class="directory-grid">{items.filter(item=>item.category===category).map(item=><a class="directory-card" data-directory-entry={item.index} href={item.url} target="_blank" rel="noopener noreferrer">
+      {item.image?<img src={item.image} alt="" width="48" height="48" loading="lazy"/>:<span class="directory-initial">{item.name.slice(0,1)}</span>}
+      <div><h3>{item.name}</h3><p><MultilineText value={item.description}/></p></div><Icon name="diagonal" size={16}/>
+    </a>)}</div></section>):
+    <div data-directory><div class="directory-controls"><label class="search-field"><Icon name="search"/><span class="sr-only">搜索导航网站</span><input type="search" data-directory-search placeholder={copy.searchPlaceholder}/></label><div class="filter-chips" aria-label="网站分类"><button data-filter="" aria-pressed="true">{settings.text.directory.all}</button>{categories.map(category=><button data-filter={category} aria-pressed="false">{category}</button>)}</div></div><div class="directory-grid">{items.map(item=><a class="directory-card" data-directory-item data-directory-entry={item.index} data-category={item.category} data-search={`${item.name} ${item.description} ${item.category}`.toLowerCase()} href={item.url} target="_blank" rel="noopener noreferrer">
+      {item.image?<img src={item.image} alt="" width="48" height="48" loading="lazy"/>:<span class="directory-initial">{item.name.slice(0,1)}</span>}
+      <div><span class="eyebrow">{item.category}</span><h2>{item.name}</h2><p><MultilineText value={item.description}/></p></div><Icon name="diagonal" size={16}/>
+    </a>)}</div><p data-no-results hidden class="empty-state" role="status">{copy.noResults}</p></div>}
+</div>

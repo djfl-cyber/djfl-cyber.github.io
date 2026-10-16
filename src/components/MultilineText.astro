@@ -1,0 +1,6 @@
+---
+interface Props {value?:string | number | null;wrap?:boolean}
+const {value,wrap=false}=Astro.props;
+const lines=String(value??'').replace(/\r\n?/g,'\n').split('\n');
+---
+{value!==undefined&&value!==null&&(wrap?<span data-layout-text-content>{lines.map((line,index)=><Fragment>{index>0&&<br/>}{line}</Fragment>)}</span>:lines.map((line,index)=><Fragment>{index>0&&<br/>}{line}</Fragment>))}

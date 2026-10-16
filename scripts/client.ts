@@ -73,8 +73,7 @@ if(article){
   if(location.hash){try{const target=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(target)requestAnimationFrame(()=>target.scrollIntoView({behavior:'instant',block:'start'}));}catch{}}
 }
 
-const directory=document.querySelector<HTMLElement>('[data-directory]');
-if(directory){
+for(const directory of document.querySelectorAll<HTMLElement>('[data-directory]')){
   const search=directory.querySelector<HTMLInputElement>('[data-directory-search]');
   const items=[...directory.querySelectorAll<HTMLElement>('[data-directory-item]')];let category='';
   const filter=()=>{const query=search?.value.trim().toLowerCase()??'';let visible=0;for(const item of items){const show=(!category||item.dataset.category===category)&&(!query||(item.dataset.search??'').includes(query));item.hidden=!show;if(show)visible++;}const empty=directory.querySelector<HTMLElement>('[data-no-results]');if(empty)empty.hidden=visible>0;};

@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import LayoutRenderer from '../components/LayoutRenderer.astro';
 import {layout} from '../lib/layouts';
 import {getPosts} from '../lib/content';
-const posts=await getPosts();
-const {document,settings}=await layout('home');
+const posts=await getPosts(Astro.request);
+const {document,settings}=await layout('home',Astro.request);
 ---
 <BaseLayout>{document&&<LayoutRenderer document={document} settings={settings} posts={posts}/>}</BaseLayout>

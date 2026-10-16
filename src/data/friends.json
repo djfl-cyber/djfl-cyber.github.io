@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "name": "KA’s Blog",
+    "url": "https://kioroshiaki.github.io/",
+    "description": "pwn大手子",
+    "category": "CTFer",
+    "order": 0,
+    "enabled": true,
+    "image": "https://kioroshiaki.github.io/img/blowfish_logo_hu_81700eacd4516d13.png"
+  }
+]

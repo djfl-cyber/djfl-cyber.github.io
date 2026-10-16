@@ -3,7 +3,7 @@ import LayoutNode from './LayoutNode.astro';
 import {getPosts} from '../lib/content';
 import {pageCSS,type PageDocument} from '../lib/layout-model.mjs';
 interface Props {document:PageDocument;settings:any;posts?:any[];context?:any}
-const {document,settings,posts=await getPosts(),context={}}=Astro.props;
+const {document,settings,posts=await getPosts(Astro.request),context={}}=Astro.props;
 const css=pageCSS(document,settings);
 ---
 <style is:inline set:html={css}/><LayoutNode node={document.root} settings={settings} posts={posts} context={context}><slot/></LayoutNode>

@@ -6,7 +6,7 @@ import {layout} from '../lib/layouts';
 import {excerpt,type Post} from '../lib/content';
 interface Props {post:Post;headings:MarkdownHeading[];previous?:Post;next?:Post}
 const {post,headings,previous,next}=Astro.props;
-const page=await layout('post');
+const page=await layout('post',Astro.request);
 const context={post,headings,previous,next,showToc:!!(post.data.toc&&headings.length>0)};
 ---
 <BaseLayout title={post.data.title} description={excerpt(post)} canonical={post.data.permalink} article noindex={post.data.draft}><div class="reading-progress" data-reading-progress aria-hidden="true"/>{page.document&&<LayoutRenderer document={page.document} settings={page.settings} context={context}><slot/></LayoutRenderer>}</BaseLayout>
