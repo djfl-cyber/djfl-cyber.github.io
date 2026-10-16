@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "example.music-player",
+  "name": "简洁音乐播放器",
+  "version": "1.0.0",
+  "hostApi": "^1.0.0",
+  "kind": "widget",
+  "runtime": "iframe",
+  "entry": "entry.html",
+  "configSchema": "schema.json",
+  "placements": [
+    "flow",
+    "floating"
+  ],
+  "defaultSize": {
+    "width": 340,
+    "height": 116
+  },
+  "capabilities": [
+    "audio",
+    "storage"
+  ],
+  "networkOrigins": [],
+  "integrity": {
+    "entry.html": "84bae472937b8be12436f57ec59851efb3c5f09457d49b2bbffd3dddd441b42f",
+    "runtime.js": "13b5d02220fceca96ce6ccdb3b6ac87ede48b4f90c7417773782b88e133b611e",
+    "style.css": "5be9d52369c33d39afa93f741172cdcb67d37c8600c0415c3be30511f80603f9",
+    "schema.json": "12b90905a3a4bdd4c2efddf5413cabc20b5ebcabe982bc6cdc3f353e7d9b1e74",
+    "LICENSE": "59b07e628e7ba8c00c3436414a1b1534258b5e1297ca37d4f344244bb11e0707",
+    "assets/demo.wav": "e1f535b32c340c0674db46f0f5929d1d310ea09767c0a087213096af8acb295e"
+  }
+}

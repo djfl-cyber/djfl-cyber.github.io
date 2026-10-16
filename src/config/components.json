@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "instances": [
+    {
+      "id": "instance-98c2978e-8f3",
+      "componentId": "example.music-player",
+      "version": "1.0.0",
+      "enabled": false,
+      "placement": "floating",
+      "pages": [
+        "*"
+      ],
+      "hideOnMobile": false,
+      "style": {
+        "width": 340,
+        "height": 116,
+        "bottom": 24,
+        "right": 24,
+        "zIndex": 20
+      },
+      "config": {
+        "title": "留声片刻",
+        "accent": "#749279",
+        "volume": 0.5,
+        "loop": false,
+        "tracks": [
+          {
+            "title": "示例提示音",
+            "src": "/components/example.music-player/1.0.0/assets/demo.wav"
+          }
+        ]
+      }
+    }
+  ]
+}

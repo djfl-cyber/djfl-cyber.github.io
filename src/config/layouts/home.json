@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "id": "home",
+  "title": "首页",
+  "route": "/",
+  "scope": "page",
+  "root": {
+    "id": "home-root",
+    "type": "container",
+    "name": "首页容器",
+    "props": {
+      "className": "page-shell"
+    },
+    "children": [
+      {
+        "id": "hero",
+        "type": "container",
+        "name": "开场区域",
+        "when": "home.hero.enabled",
+        "props": {
+          "tag": "section",
+          "className": "hero"
+        },
+        "children": [
+          {
+            "id": "hero-copy",
+            "type": "container",
+            "name": "开场文字",
+            "props": {
+              "className": "hero-copy"
+            },
+            "children": [
+              {
+                "id": "eyebrow",
+                "type": "text",
+                "name": "眉题",
+                "props": {
+                  "className": "eyebrow",
+                  "rule": true
+                },
+                "bindings": {
+                  "text": "home.hero.eyebrow"
+                }
+              },
+              {
+                "id": "title",
+                "type": "text",
+                "name": "首页标题",
+                "props": {
+                  "tag": "h1"
+                },
+                "bindings": {
+                  "text": "home.hero.title"
+                },
+                "style": {
+                  "width": 339,
+                  "height": 126
+                }
+              },
+              {
+                "id": "hero-button",
+                "type": "link",
+                "name": "开场按钮",
+                "props": {
+                  "className": "primary-link",
+                  "href": "/#notes",
+                  "icon": true
+                },
+                "bindings": {
+                  "text": "home.hero.buttonText"
+                },
+                "style": {
+                  "position": "relative",
+                  "left": 0,
+                  "top": 8
+                }
+              }
+            ]
+          },
+          {
+            "id": "art",
+            "type": "hero-art",
+            "name": "纸张装饰",
+            "when": "appearance.decorations"
+          }
+        ]
+      },
+      {
+        "id": "grid",
+        "type": "container",
+        "name": "首页分栏",
+        "props": {
+          "className": "home-grid"
+        },
+        "children": [
+          {
+            "id": "main",
+            "type": "container",
+            "name": "首页内容",
+            "props": {
+              "className": "home-main"
+            },
+            "children": [
+              {
+                "id": "posts",
+                "type": "posts",
+                "name": "文章列表"
+              },
+              {
+                "id": "explore",
+                "type": "explore",
+                "name": "探索入口"
+              }
+            ]
+          },
+          {
+            "id": "sidebar",
+            "type": "sidebar",
+            "name": "侧栏",
+            "when": "home.sidebar.enabled"
+          }
+        ]
+      }
+    ]
+  }
+}

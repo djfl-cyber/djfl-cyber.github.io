@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "navigation",
+  "title": "导航",
+  "route": "/navigation/",
+  "scope": "page",
+  "root": {
+    "id": "navigation-root",
+    "type": "container",
+    "name": "页面容器",
+    "props": {
+      "className": "page-shell interior-page"
+    },
+    "children": [
+      {
+        "id": "navigation-intro",
+        "type": "container",
+        "name": "页面介绍",
+        "props": {
+          "tag": "header",
+          "className": "page-intro"
+        },
+        "children": [
+          {
+            "id": "navigation-eyebrow",
+            "type": "text",
+            "name": "眉题",
+            "props": {
+              "className": "eyebrow"
+            },
+            "bindings": {
+              "text": "pages.navigation.eyebrow"
+            }
+          },
+          {
+            "id": "navigation-title",
+            "type": "text",
+            "name": "页面标题",
+            "props": {
+              "tag": "h1"
+            },
+            "bindings": {
+              "text": "pages.navigation.title"
+            }
+          },
+          {
+            "id": "navigation-description",
+            "type": "text",
+            "name": "页面介绍",
+            "bindings": {
+              "text": "pages.navigation.description"
+            }
+          }
+        ]
+      },
+      {
+        "id": "navigation-content",
+        "type": "content",
+        "name": "动态页面内容"
+      }
+    ]
+  }
+}

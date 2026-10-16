@@ -1,3 +1,1 @@
-interface ImportMetaEnv {
-  readonly LOCAL_TEXT_EDITOR_AVAILABLE:boolean;
-}
+declare module 'virtual:blog-layout-preview' {export function readLayout(id:string):Promise<any>;}

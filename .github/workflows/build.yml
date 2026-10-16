@@ -1,4 +1,5 @@
 name: Check and build blog
+run-name: "Blog · ${{ github.event_name }} · ${{ inputs.request_id || github.sha }}"
 on:
   push:
     branches: [main, source]
@@ -9,6 +10,14 @@ on:
         description: Deploy this build to GitHub Pages
         type: boolean
         default: false
+      request_id:
+        description: Unique release request ID
+        type: string
+        default: ''
+      expected_sha:
+        description: Exact checked source commit
+        type: string
+        default: ''
 permissions:
   contents: read
 concurrency:
@@ -16,11 +25,20 @@ concurrency:
   cancel-in-progress: true
 env:
   ASTRO_TELEMETRY_DISABLED: '1'
+  BLOG_VERSION_SHA: ${{ github.sha }}
+  BLOG_REQUEST_ID: ${{ inputs.request_id || '' }}
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - name: Verify the requested source commit
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy
+        env:
+          EXPECTED_SHA: ${{ inputs.expected_sha }}
+        run: |
+          test -n "$EXPECTED_SHA"
+          test "$GITHUB_SHA" = "$EXPECTED_SHA"
       - uses: actions/setup-node@v7
         with:
           node-version: '24.12.0'
@@ -29,7 +47,7 @@ jobs:
       - run: npm run test
       - run: npm run check:content
       - run: npm run check
-      - name: Build blog and reject local workbench files
+      - name: Build blog and reject private management files
         run: npm run build
       - run: npm run check:links
       - uses: actions/upload-pages-artifact@v4

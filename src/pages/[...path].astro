@@ -1,9 +1,15 @@
 ---
+import redirects from '../config/redirects.json';
 import {render} from 'astro:content';
 import {getPosts} from '../lib/content';
 import PostLayout from '../layouts/PostLayout.astro';
-export async function getStaticPaths(){const posts=await getPosts();return posts.map((post,index)=>({params:{path:post.data.permalink.slice(1,-1)},props:{post,previous:posts[index-1],next:posts[index+1]}}));}
-const {post,previous,next}=Astro.props;
-const {Content,headings}=await render(post);
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LayoutRenderer from '../components/LayoutRenderer.astro';
+import {layout} from '../lib/layouts';
+export async function getStaticPaths(){const posts=await getPosts();const pages=import.meta.glob<{default:{id:string;route:string}}>('../config/layouts/page-*.json',{eager:true});return [...Object.entries(redirects).filter(([from])=>!posts.some(p=>p.data.permalink===from)).map(([from,to])=>({params:{path:from.slice(1,-1)},props:{redirect:String(to)}})),...posts.map((post,index)=>({params:{path:post.data.permalink.slice(1,-1)},props:{post,previous:posts[index-1],next:posts[index+1]}})),...Object.values(pages).map(({default:page})=>({params:{path:page.route.slice(1,-1)},props:{id:page.id}}))];}
+const {post,previous,next,id,redirect}=Astro.props;
+const rendered=post?await render(post):null;
+const Content=rendered?.Content;
+const page=id?await layout(id):null;
 ---
-<PostLayout post={post} headings={headings} previous={previous} next={next}><Content/></PostLayout>
+{redirect?<html lang="zh-CN"><head><meta charset="utf-8"/><meta name="robots" content="noindex"/><title>页面已迁移</title><link rel="canonical" href={redirect}/><script is:inline define:vars={{target:redirect}}>location.replace(target+location.search+location.hash);</script></head><body><p>页面已迁移：<a href={redirect}>打开新地址</a></p></body></html>:post&&Content?<PostLayout post={post} headings={rendered!.headings} previous={previous} next={next}><Content/></PostLayout>:page?.document&&<BaseLayout title={page.document.title}><LayoutRenderer document={page.document} settings={page.settings}/></BaseLayout>}

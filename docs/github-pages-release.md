@@ -45,11 +45,11 @@ git ls-remote --heads origin
 ```powershell
 git add .
 git status --short
-git ls-files -- scripts/editor scripts/edit.mjs scripts/tests/editor.test.mjs scripts/artifacts .cache .env
+git ls-files -- scripts/studio "Blog Studio.cmd" scripts/artifacts .cache .env
 npm run check:release
 ```
 
-`git ls-files` 这条命令应没有输出。工作台、备份、令牌、缓存均在忽略范围内；`check:release` 还会拒绝已被跟踪的工作台文件。
+`git ls-files` 这条命令应没有输出。本地管理程序、备份、令牌、缓存均在忽略范围内；`check:release` 还会拒绝已被跟踪的私有管理文件。
 
 确认后提交并上传：
 

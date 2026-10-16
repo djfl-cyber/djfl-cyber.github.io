@@ -2,6 +2,8 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WidgetHost from '../components/WidgetHost.astro';
+import LayoutRenderer from '../components/LayoutRenderer.astro';
+import {layout} from '../lib/layouts';
 import {site,appearance,themeVariables,text} from '../lib/settings';
 import '../styles/global.css';
 import '../styles/article.css';
@@ -9,6 +11,7 @@ interface Props {title?:string;description?:string;canonical?:string;article?:bo
 const {title,description=site.description,canonical=Astro.url.pathname,article=false,noindex=false}=Astro.props;
 const fullTitle=title?`${title} · ${site.title}`:site.title;
 const canonicalUrl=new URL(canonical,site.site).href;
+const headerLayout=await layout('header');const footerLayout=await layout('footer');
 ---
 <!doctype html>
 <html lang={site.language} data-theme={appearance.defaultTheme==='dark'?'dark':'light'} data-decorations={String(appearance.decorations)} style={themeVariables}>
@@ -24,9 +27,9 @@ const canonicalUrl=new URL(canonical,site.site).href;
   </head>
   <body data-code-copy={text.article.copy} data-code-copied={text.article.copied} data-code-failed={text.article.copyFailed} data-code-expand={text.article.expand} data-code-collapse={text.article.collapse}>
     <a href="#main" class="skip-link">跳到正文</a>
-    <Header/>
+    {headerLayout.document?<LayoutRenderer document={headerLayout.document} settings={headerLayout.settings}/>:<Header/>}
     <main id="main" tabindex="-1"><slot/></main>
-    <Footer/><WidgetHost/>
+    {footerLayout.document?<LayoutRenderer document={footerLayout.document} settings={footerLayout.settings}/>:<Footer/>}<WidgetHost/>
     <script>import '../../scripts/client';</script>
   </body>
 </html>

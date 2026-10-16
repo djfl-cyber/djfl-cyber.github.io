@@ -4,10 +4,13 @@ dist/
 .cache/
 public/img/
 scripts/artifacts/
-# Local workbench: keep its source, tests and launcher on this computer.
+# Retired paths stay ignored so restoring an old copy cannot upload it.
 /scripts/editor/
 /scripts/edit.mjs
 /scripts/tests/editor.test.mjs
+# Blog Studio is a local desktop tool, never part of the public source repository.
+/scripts/studio/
+/Blog Studio.cmd
 .env
 .env.*
 !.env.example

@@ -1,0 +1,8 @@
+---
+import PostCard from '../PostCard.astro';
+import Icon from '../Icon.astro';
+const {nodeAttrs={},settings,posts=[],kind}=Astro.props;
+const module=settings.home.modules.find((m:any)=>m.type===kind);
+const text=settings.text;
+---
+{module?.enabled&&(kind==='posts'?<section id="notes" class="home-section" {...nodeAttrs}><div class="section-heading"><div><span class="eyebrow">{module.subtitle}</span><h2>{module.title}<span class="section-count mono">{posts.length.toString().padStart(2,'0')}</span></h2></div><a class="text-link" href="/archives/">{text.home.allPosts}<Icon name="arrow" size={16}/></a></div><div class="post-list">{posts.slice(0,module.count||posts.length).map((post:any,index:number)=><PostCard post={post} index={index}/>)}</div></section>:<section class="home-section explore-section" {...nodeAttrs}><div class="section-heading"><div><span class="eyebrow">{module.subtitle}</span><h2>{module.title}</h2></div></div><div class="explore-grid"><a class="explore-card" href="/friends/"><Icon name="link" size={22}/><strong>{text.home.friendsTitle}</strong><p>{text.home.friendsDescription}</p><Icon name="diagonal" size={16}/></a><a class="explore-card" href="/navigation/"><Icon name="compass" size={22}/><strong>{text.home.navigationTitle}</strong><p>{text.home.navigationDescription}</p><Icon name="diagonal" size={16}/></a></div></section>)}

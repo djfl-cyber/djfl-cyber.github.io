@@ -1,24 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Sidebar from '../components/Sidebar.astro';
-import PostCard from '../components/PostCard.astro';
-import Icon from '../components/Icon.astro';
-import {home,site,appearance,text} from '../lib/settings';
+import LayoutRenderer from '../components/LayoutRenderer.astro';
+import {layout} from '../lib/layouts';
 import {getPosts} from '../lib/content';
 const posts=await getPosts();
-const hasPosts=home.modules.some(m=>m.type==='posts'&&m.enabled);
+const {document,settings}=await layout('home');
 ---
-<BaseLayout>
-  <div class="page-shell">
-    {home.hero.enabled&&<section class="hero">
-      <div class="hero-copy"><p class="eyebrow"><span class="tiny-rule"/>{home.hero.eyebrow}</p><h1>{home.hero.title}</h1><p class="hero-description">{home.hero.description}</p><a class="primary-link" href={hasPosts?'#notes':'/archives/'}>{home.hero.buttonText}<Icon name="arrow" size={18}/></a></div>
-      {appearance.decorations&&<div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"/><div class="orbit orbit-two"/><div class="note-sheet"><div class="sheet-top mono"><span>{text.home.sheetTitle}</span><span>↗</span></div><div class="sheet-symbol">*</div><div class="sheet-bottom"><span>{home.hero.note}</span><span class="mono">{site.author} / {site.startYear}</span></div></div><span class="art-caption mono">{text.home.artCaption}</span></div>}
-    </section>}
-    <div class:list={['home-grid',{'without-sidebar':!home.sidebar.enabled}]}>
-      <div class="home-main">
-        {home.modules.filter(m=>m.enabled).map(module=>module.type==='posts'?<section id="notes" class="home-section"><div class="section-heading"><div><span class="eyebrow">{module.subtitle}</span><h2>{module.title}<span class="section-count mono">{posts.length.toString().padStart(2,'0')}</span></h2></div><a class="text-link" href="/archives/">{text.home.allPosts}<Icon name="arrow" size={16}/></a></div><div class="post-list">{posts.slice(0,module.count||posts.length).map((post,index)=><PostCard post={post} index={index}/>)}</div></section>:<section class="home-section explore-section"><div class="section-heading"><div><span class="eyebrow">{module.subtitle}</span><h2>{module.title}</h2></div></div><div class="explore-grid"><a class="explore-card" href="/friends/"><Icon name="link" size={22}/><strong>{text.home.friendsTitle}</strong><p>{text.home.friendsDescription}</p><Icon name="diagonal" size={16}/></a><a class="explore-card" href="/navigation/"><Icon name="compass" size={22}/><strong>{text.home.navigationTitle}</strong><p>{text.home.navigationDescription}</p><Icon name="diagonal" size={16}/></a></div></section>)}
-      </div>
-      {home.sidebar.enabled&&<Sidebar posts={posts}/>}
-    </div>
-  </div>
-</BaseLayout>
+<BaseLayout>{document&&<LayoutRenderer document={document} settings={settings} posts={posts}/>}</BaseLayout>

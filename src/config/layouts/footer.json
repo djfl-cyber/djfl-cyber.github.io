@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "footer",
+  "title": "共用页脚",
+  "route": "/",
+  "scope": "global",
+  "root": {
+    "id": "footer",
+    "type": "footer",
+    "name": "页脚"
+  }
+}

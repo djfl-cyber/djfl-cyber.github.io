@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "archives",
+  "title": "归档",
+  "route": "/archives/",
+  "scope": "template",
+  "root": {
+    "id": "archives-root",
+    "type": "container",
+    "name": "页面容器",
+    "props": {
+      "className": "page-shell interior-page"
+    },
+    "children": [
+      {
+        "id": "archives-intro",
+        "type": "container",
+        "name": "页面介绍",
+        "props": {
+          "tag": "header",
+          "className": "page-intro"
+        },
+        "children": [
+          {
+            "id": "archives-eyebrow",
+            "type": "text",
+            "name": "眉题",
+            "props": {
+              "className": "eyebrow"
+            },
+            "bindings": {
+              "text": "pages.archives.eyebrow"
+            }
+          },
+          {
+            "id": "archives-title",
+            "type": "text",
+            "name": "页面标题",
+            "props": {
+              "tag": "h1"
+            },
+            "bindings": {
+              "text": "pages.archives.title"
+            }
+          },
+          {
+            "id": "archives-description",
+            "type": "text",
+            "name": "页面介绍",
+            "bindings": {
+              "text": "pages.archives.description"
+            }
+          }
+        ]
+      },
+      {
+        "id": "archives-content",
+        "type": "content",
+        "name": "动态页面内容"
+      }
+    ]
+  }
+}

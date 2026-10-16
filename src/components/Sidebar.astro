@@ -1,16 +1,17 @@
 ---
 import {Image} from 'astro:assets';
 import avatar from '../assets/legacy/head.jpg';
-import {site,home,text} from '../lib/settings';
+import * as defaults from '../lib/settings';
 import {dateParts,type Post} from '../lib/content';
 import Icon from './Icon.astro';
-interface Props {posts:Post[]}
-const {posts}=Astro.props;
+interface Props {posts:Post[];nodeAttrs?:Record<string,string>;settings?:any}
+const {posts,nodeAttrs={},settings=defaults}=Astro.props;
+const {site,home,text}=settings;
 const months=Object.entries(posts.reduce<Record<string,number>>((all,p)=>{const d=dateParts(p.data.date);const key=`${d.year}/${d.month}`;all[key]=(all[key]??0)+1;return all;},{})).slice(0,4);
 ---
-<aside class="home-sidebar" aria-label="作者与归档">
+<aside class="home-sidebar" aria-label="作者与归档" {...nodeAttrs}>
   {home.sidebar.showAuthor&&<section class="profile-panel">
-    <div class="profile-top"><Image src={avatar} width={64} height={64} format="webp" alt={`${site.author} 的头像`} class="avatar"/><span class="status-label"><i/>{text.sidebar.status}</span></div>
+    <div class="profile-top">{site.avatar?<img src={site.avatar} width="64" height="64" alt={`${site.author} 的头像`} class="avatar"/>:<Image src={avatar} width={64} height={64} format="webp" alt={`${site.author} 的头像`} class="avatar"/>}<span class="status-label"><i/>{text.sidebar.status}</span></div>
     <h2>{site.author}<span>.</span></h2><p>{site.authorBio}</p>
     <div class="profile-stats"><a href="/archives/"><strong>{posts.length.toString().padStart(2,'0')}</strong><span>{text.sidebar.postCount}</span></a><div><strong>{site.startYear}</strong><span>{text.sidebar.startYear}</span></div></div>
     <a class="text-link" href="/about/">{text.sidebar.aboutLink}<Icon name="arrow" size={16}/></a>

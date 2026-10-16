@@ -1,9 +1,12 @@
 ---
-import {menu,site,text} from '../lib/settings';
+import * as defaults from '../lib/settings';
 import Icon from './Icon.astro';
 const current=decodeURI(Astro.url.pathname);
+const {nodeAttrs={},settings=defaults}=Astro.props;
+const {site,text}=settings;
+const menu:{href:string;label:string;enabled:boolean}[]=settings.menu.filter((item:any)=>item.enabled);
 ---
-<header class="site-header">
+<header class="site-header" {...nodeAttrs}>
   <div class="header-inner">
     <a class="brand" href="/" aria-label={`${site.title} 首页`}><span class="brand-mark">{text.header.mark}<span>.</span></span><span>{site.author}<span class="brand-dot">.</span><small>{text.header.tagline}</small></span></a>
     <nav class="desktop-nav" aria-label="主导航">{menu.map(item=><a href={item.href} aria-current={(item.href==='/'?current==='/':current.startsWith(item.href))?'page':undefined}>{item.label}</a>)}</nav>

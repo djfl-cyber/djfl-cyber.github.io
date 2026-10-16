@@ -3,7 +3,7 @@
   "tasks": [
     { "label":"新建文章", "type":"process", "command":"node", "args":["scripts/new-post.mjs","${input:title}","--slug","${input:slug}"], "problemMatcher":[] },
     { "label":"预览博客", "type":"process", "command":"node", "args":["scripts/astro.mjs","dev","--host","127.0.0.1"], "problemMatcher":[] },
-    { "label":"编辑页面文字", "type":"process", "command":"npm", "windows":{"command":"npm.cmd"}, "args":["run","edit"], "problemMatcher":[] }
+    { "label":"打开博客管理程序", "type":"process", "command":"npm", "windows":{"command":"npm.cmd"}, "args":["run","edit"], "problemMatcher":[] }
   ],
   "inputs":[
     {"id":"title","type":"promptString","description":"文章标题"},

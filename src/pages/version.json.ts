@@ -1,0 +1,2 @@
+import {execFileSync} from 'node:child_process';
+export function GET(){let sha=process.env.BLOG_VERSION_SHA??process.env.GITHUB_SHA??'';if(!sha)try{sha=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();}catch{}return new Response(JSON.stringify({schemaVersion:1,sha,requestId:process.env.BLOG_REQUEST_ID??'',builtAt:new Date().toISOString()}),{headers:{'Content-Type':'application/json','Cache-Control':'no-cache'}});}

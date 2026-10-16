@@ -2,12 +2,14 @@
 import {dateLabel,readingTime,excerpt,type Post} from '../lib/content';
 import Icon from './Icon.astro';
 import {text} from '../lib/settings';
+import {safeUrl} from '../lib/layout-model.mjs';
 interface Props {post:Post;index:number}
 const {post,index}=Astro.props;
 ---
 <article class="post-card">
   <div class="post-number mono">{String(index+1).padStart(2,'0')}</div>
   <div class="post-card-content">
+    {post.data.cover&&safeUrl(post.data.cover)&&<a href={post.data.permalink} tabindex="-1" aria-hidden="true"><img src={post.data.cover} alt="" loading="lazy" style="width:100%;max-height:240px;object-fit:cover;border-radius:10px;margin-bottom:18px"/></a>}
     <div class="post-meta"><time datetime={post.data.date.toISOString()}>{dateLabel(post.data.date)}</time><span class="meta-dot"/><span>{post.data.categories[0]??text.article.fallbackCategory}</span>{post.data.draft&&<span class="draft-badge">{text.article.draft}</span>}</div>
     <h3><a href={post.data.permalink}>{post.data.title}</a></h3>
     <p>{excerpt(post)}</p>

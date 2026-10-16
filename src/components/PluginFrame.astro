@@ -1,0 +1,23 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import state from '../config/components.json';
+import {componentId,componentVersion,validateManifest,validateComponentConfig,validateSchema} from '../lib/component-model.mjs';
+interface Props {instanceId:string;nodeAttrs?:Record<string,string>}
+const {instanceId,nodeAttrs={}}=Astro.props;
+const instance=state.instances.find((i:any)=>i.id===instanceId) as any;
+let payload:any=null,error='';
+if(instance?.enabled&&instance.pages.some((p:string)=>p==='*'||decodeURI(p)===decodeURI(Astro.url.pathname)))try{
+ if(!componentId.test(instance.componentId)||!componentVersion.test(instance.version))throw Error('组件标识无效');
+ const base=path.join(process.cwd(),'public/components',instance.componentId,instance.version);
+ const manifest=validateManifest(JSON.parse(fs.readFileSync(path.join(base,'component.json'),'utf8')));
+ const schema=validateSchema(JSON.parse(fs.readFileSync(path.join(base,manifest.configSchema),'utf8')));
+ validateComponentConfig(schema,instance.config);
+ payload={manifest,instance,base:`/components/${manifest.id}/${manifest.version}/`};
+}catch(e){error='此组件暂不可用';console.warn('[component]',instanceId,String(e));}
+const placement=instance?.placement==='floating'?'position:fixed;':'';
+const css=instance?placement+Object.entries(instance.style??{}).map(([key,value])=>`${key.replace(/[A-Z]/g,m=>'-'+m.toLowerCase())}:${value}${key==='zIndex'?'':'px'}`).join(';'):'';
+---
+{payload?<section {...nodeAttrs} class:list={['blog-component',{'component-hide-mobile':instance.hideOnMobile}]} style={css} data-component-instance={instance.id}><iframe title={payload.manifest.name} sandbox="allow-scripts" referrerpolicy="no-referrer" loading="lazy" style="width:100%;height:100%;border:0;display:block"/><script type="application/json" data-component-payload set:html={JSON.stringify(payload).replaceAll('<','\\u003c')}/><small class="component-status" aria-live="polite"></small></section>:error?<div {...nodeAttrs} class="component-unavailable">{error}</div>:<div {...nodeAttrs} data-component-placeholder={instanceId}></div>}
+<style>.blog-component{max-width:100vw;min-height:32px}.component-status:not(:empty){position:absolute;bottom:0;left:0;background:var(--paper,#fff);font-size:11px;padding:3px 6px}.component-unavailable{font-size:12px;color:#888}@media(max-width:639px){.component-hide-mobile{display:none!important}}</style>
+<script>import '../lib/component-host';</script>

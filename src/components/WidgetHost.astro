@@ -1,1 +1,5 @@
-<div id="widget-host" class="widget-host"><slot/></div>
+---
+import state from '../config/components.json';
+import PluginFrame from './PluginFrame.astro';
+---
+<div id="widget-host" class="widget-host">{state.instances.filter((i:any)=>i.placement==='floating').map((i:any)=><PluginFrame instanceId={i.id}/>)}<slot/></div>

@@ -1,0 +1,5 @@
+---
+import {site,home,text} from '../../lib/settings';
+const {nodeAttrs={},settings={site,home,text}}=Astro.props;
+---
+<div class="hero-art" aria-hidden="true" {...nodeAttrs}><div class="orbit orbit-one"/><div class="orbit orbit-two"/><div class="note-sheet"><div class="sheet-top mono"><span>{settings.text.home.sheetTitle}</span><span>↗</span></div><div class="sheet-symbol">*</div><div class="sheet-bottom"><span>{settings.home.hero.note}</span><span class="mono">{settings.site.author} / {settings.site.startYear}</span></div></div><span class="art-caption mono">{settings.text.home.artCaption}</span></div>

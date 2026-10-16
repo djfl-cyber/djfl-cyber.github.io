@@ -1,6 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import LayoutRenderer from '../components/LayoutRenderer.astro';
+import {layout} from '../lib/layouts';
 interface Props {title:string;eyebrow:string;description:string;noindex?:boolean}
 const {title,eyebrow,description,noindex}=Astro.props;
+const id=Astro.url.pathname.split('/').filter(Boolean)[0]??'';
+const page=await layout(id);
 ---
-<BaseLayout title={title} description={description} noindex={noindex}><div class="page-shell interior-page"><header class="page-intro"><p class="eyebrow"><span class="tiny-rule"/>{eyebrow}</p><h1>{title}</h1><p>{description}</p></header><slot/></div></BaseLayout>
+<BaseLayout title={title} description={description} noindex={noindex}>{page.document?<LayoutRenderer document={page.document} settings={page.settings} context={{title,description,eyebrow,dynamicTitle:['tags','categories'].includes(id)&&Astro.url.pathname.split('/').filter(Boolean).length>1}}><slot/></LayoutRenderer>:<div class="page-shell interior-page"><header class="page-intro"><p class="eyebrow"><span class="tiny-rule"/>{eyebrow}</p><h1>{title}</h1><p>{description}</p></header><slot/></div>}</BaseLayout>

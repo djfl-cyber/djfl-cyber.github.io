@@ -1,0 +1,19 @@
+type Session={token:string;frame:HTMLIFrameElement;root:HTMLElement;payload:any;last:number;count:number};
+const sessions=new Map<Window,Session>();
+const channel='blog-component-v1';
+function send(s:Session,type:string,payload:unknown){s.frame.contentWindow?.postMessage({channel,token:s.token,type,payload},'*');}
+function setup(){document.querySelectorAll<HTMLElement>('[data-component-instance]').forEach(root=>{if(root.dataset.mounted)return;root.dataset.mounted='true';try{const payload=JSON.parse(root.querySelector('[data-component-payload]')!.textContent!),frame=root.querySelector('iframe')!,token=crypto.randomUUID();const session={token,frame,root,payload,last:Date.now(),count:0};const manifest=payload.manifest;
+
+ if(frame.contentWindow)sessions.set(frame.contentWindow,session);frame.addEventListener('load',()=>{if(!frame.contentWindow)return;sessions.set(frame.contentWindow,session);send(session,'init',{apiVersion:'1.0.0',instanceId:payload.instance.id,config:payload.instance.config,theme:document.documentElement.dataset.theme??'light',viewport:{width:innerWidth,height:innerHeight},capabilities:manifest.capabilities});});frame.src='/component-frame/'+manifest.id+'/'+manifest.version+'.html';
+ }catch{root.querySelector('.component-status')!.textContent='组件加载失败';}});}
+window.addEventListener('message',event=>{const s=event.source&&sessions.get(event.source as Window);if(!s||!s.root.isConnected||event.origin!=='null'||event.data?.channel!==channel||event.data.token!==s.token)return;const message=event.data;try{if(JSON.stringify(message).length>64000)return;}catch{return;}if(Date.now()-s.last>1000){s.last=Date.now();s.count=0;}if(++s.count>30)return;const caps=s.payload.manifest.capabilities;const status=s.root.querySelector('.component-status')!;
+ if(message.type==='status')status.textContent=message.payload?.error?String(message.payload.error).slice(0,100):'';
+ if(message.type==='resize'&&caps.includes('resize')){const {width,height}=message.payload??{};if(Number.isFinite(width)&&width>=32&&width<=1200)s.root.style.width=Math.min(width,innerWidth)+'px';if(Number.isFinite(height)&&height>=32&&height<=1200)s.root.style.height=height+'px';}
+ if(['storage.get','storage.set','storage.remove'].includes(message.type)&&caps.includes('storage')){const {key,value,requestId}=message.payload??{};if(typeof key!=='string'||key.length>64||typeof requestId!=='string')return;const prefix=`blog-component:${s.payload.manifest.id}:${s.payload.instance.id}:`;try{let result:any=null;if(message.type==='storage.get')result=JSON.parse(localStorage.getItem(prefix+key)??'null');if(message.type==='storage.set'){if(JSON.stringify(value).length>4096)return;if(!localStorage.getItem(prefix+key)&&Object.keys(localStorage).filter(k=>k.startsWith(prefix)).length>=32)return;localStorage.setItem(prefix+key,JSON.stringify(value));}if(message.type==='storage.remove')localStorage.removeItem(prefix+key);send(s,'storage.result',{requestId,value:result});}catch{send(s,'storage.result',{requestId,error:'浏览器存储不可用'});}}
+});
+function cleanup(all=false){for(const [source,s]of sessions)if(all||!s.root.isConnected){send(s,'destroy',{});delete s.root.dataset.mounted;sessions.delete(source);}}
+new MutationObserver(records=>{cleanup();if(records.some(r=>r.type==='attributes'))for(const s of sessions.values())send(s,'theme',{theme:document.documentElement.dataset.theme??'light'});if(records.some(r=>r.type==='childList'))setup();}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme'],childList:true,subtree:true});
+window.addEventListener('pagehide',()=>cleanup(true));
+window.addEventListener('pageshow',()=>setup());
+window.addEventListener('resize',()=>{for(const s of sessions.values())send(s,'viewport',{width:innerWidth,height:innerHeight});});
+document.readyState==='loading'?document.addEventListener('DOMContentLoaded',setup,{once:true}):setup();

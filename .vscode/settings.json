@@ -1,4 +1,10 @@
 {
-  "markdown.copyFiles.destination": { "/src/content/posts/**/*": "img/" },
+  "markdown.copyFiles.destination": { "**/src/content/posts/**": "${documentDirName}/img/${fileName}" },
+  "editor.pasteAs.enabled": true,
+  "markdown.editor.filePaste.enabled": "smart",
+  "markdown.editor.filePaste.copyIntoWorkspace": "mediaFiles",
+  "pasteImage.path": "${currentFileDir}/img",
+  "pasteImage.basePath": "${currentFileDir}",
+  "pasteImage.forceUnixStyleSeparator": true,
   "markdown.validate.enabled": true
 }

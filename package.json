@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "node scripts/prepare-assets.mjs && node scripts/astro.mjs dev --host 127.0.0.1",
-    "edit": "node scripts/edit.mjs",
+    "edit": "node scripts/studio-launch.mjs",
     "build": "node scripts/prepare-assets.mjs && node scripts/astro.mjs build && node scripts/check-release.mjs",
     "preview": "node scripts/astro.mjs preview --host 127.0.0.1",
     "check": "node scripts/astro.mjs check",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
+    "@types/node": "24.10.0",
     "typescript": "6.0.3"
   }
 }

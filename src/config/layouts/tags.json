@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "tags",
+  "title": "标签模板",
+  "scope": "template",
+  "route": "/tags/",
+  "root": {
+    "id": "tags-root",
+    "type": "container",
+    "name": "页面容器",
+    "props": {
+      "className": "page-shell interior-page"
+    },
+    "children": [
+      {
+        "id": "tags-intro",
+        "type": "container",
+        "name": "页面介绍",
+        "props": {
+          "tag": "header",
+          "className": "page-intro"
+        },
+        "children": [
+          {
+            "id": "tags-eyebrow",
+            "type": "text",
+            "name": "眉题",
+            "props": {
+              "className": "eyebrow",
+              "rule": true
+            },
+            "bindings": {
+              "text": "text.tags.eyebrow"
+            }
+          },
+          {
+            "id": "tags-title",
+            "type": "text",
+            "name": "页面标题",
+            "props": {
+              "tag": "h1",
+              "dynamicPageTitle": true
+            },
+            "bindings": {
+              "text": "text.tags.title"
+            }
+          },
+          {
+            "id": "tags-description",
+            "type": "text",
+            "name": "页面介绍",
+            "bindings": {
+              "text": "text.tags.description"
+            }
+          }
+        ]
+      },
+      {
+        "id": "tags-content",
+        "type": "content",
+        "name": "动态内容"
+      }
+    ]
+  }
+}

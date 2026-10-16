@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "id": "categories",
+  "title": "分类模板",
+  "scope": "template",
+  "route": "/categories/",
+  "root": {
+    "id": "categories-root",
+    "type": "container",
+    "name": "页面容器",
+    "props": {
+      "className": "page-shell interior-page"
+    },
+    "children": [
+      {
+        "id": "categories-intro",
+        "type": "container",
+        "name": "页面介绍",
+        "props": {
+          "tag": "header",
+          "className": "page-intro"
+        },
+        "children": [
+          {
+            "id": "categories-eyebrow",
+            "type": "text",
+            "name": "眉题",
+            "props": {
+              "className": "eyebrow",
+              "rule": true
+            },
+            "bindings": {
+              "text": "text.categories.eyebrow"
+            }
+          },
+          {
+            "id": "categories-title",
+            "type": "text",
+            "name": "页面标题",
+            "props": {
+              "tag": "h1",
+              "dynamicPageTitle": true
+            },
+            "bindings": {
+              "text": "text.categories.title"
+            }
+          },
+          {
+            "id": "categories-description",
+            "type": "text",
+            "name": "页面介绍",
+            "bindings": {
+              "text": "text.categories.description"
+            }
+          }
+        ]
+      },
+      {
+        "id": "categories-content",
+        "type": "content",
+        "name": "动态内容"
+      }
+    ]
+  }
+}

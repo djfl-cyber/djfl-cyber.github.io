@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "id": "post",
+  "title": "文章模板",
+  "scope": "template",
+  "route": "/2026/10/14/TSCTF-J2026-WP/",
+  "root": {
+    "id": "post-root",
+    "type": "container",
+    "name": "文章页面",
+    "props": {
+      "className": "page-shell post-page"
+    },
+    "children": [
+      {
+        "id": "post-back",
+        "type": "link",
+        "name": "返回列表",
+        "props": {
+          "href": "/archives/",
+          "className": "back-link"
+        },
+        "bindings": {
+          "text": "text.article.back"
+        }
+      },
+      {
+        "id": "post-grid",
+        "type": "container",
+        "name": "文章与目录分栏",
+        "props": {
+          "className": "article-grid"
+        },
+        "children": [
+          {
+            "id": "post-main",
+            "type": "container",
+            "name": "文章主栏",
+            "props": {
+              "className": "article-main"
+            },
+            "children": [
+              {
+                "id": "post-header",
+                "type": "post-header",
+                "name": "标题与元数据"
+              },
+              {
+                "id": "post-body",
+                "type": "post-body",
+                "name": "Markdown 正文"
+              },
+              {
+                "id": "post-end",
+                "type": "post-end",
+                "name": "文末寄语"
+              },
+              {
+                "id": "post-nav",
+                "type": "post-nav",
+                "name": "相邻文章"
+              }
+            ]
+          },
+          {
+            "id": "post-toc",
+            "type": "post-toc",
+            "name": "文章目录"
+          }
+        ]
+      },
+      {
+        "id": "post-mobile-toc",
+        "type": "post-mobile-toc",
+        "name": "手机目录"
+      }
+    ]
+  }
+}

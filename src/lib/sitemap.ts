@@ -3,6 +3,7 @@ import {site} from './settings';
 export async function sitemapXml(){
   const posts=await getPosts();
   const routes=new Set(['/','/archives/','/friends/','/navigation/','/about/']);
+  for(const {default:page} of Object.values(import.meta.glob<{default:{route:string}}>('../config/layouts/page-*.json',{eager:true})))routes.add(page.route);
   for(const post of posts){routes.add(post.data.permalink);const d=dateParts(post.data.date);routes.add(`/archives/${d.year}/`);routes.add(`/archives/${d.year}/${d.month}/`);}
   for(const kind of ['tags','categories'] as const){const terms=allTerms(posts,kind);if(terms.length)routes.add(`/${kind}/`);for(const term of terms)routes.add(`/${kind}/${encodeURIComponent(term)}/`);}
   const escape=(value:string)=>value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');

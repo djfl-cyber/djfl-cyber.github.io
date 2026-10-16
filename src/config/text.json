@@ -1,12 +1,72 @@
 {
-  "header": { "mark": "d", "tagline": "个人笔记" },
-  "footer": { "note": "NOTES, AT MY OWN PACE." },
-  "home": { "sheetTitle": "FIELD NOTES", "artCaption": "THINK. EXPLORE. WRITE.", "allPosts": "全部文章", "friendsTitle": "友链", "friendsDescription": "去朋友的地方坐坐", "navigationTitle": "导航", "navigationDescription": "收藏探索的入口" },
-  "sidebar": { "status": "保持好奇", "postCount": "篇记录", "startYear": "开始写作", "aboutLink": "关于这个小站", "archiveEyebrow": "BY THE MONTH", "archiveTitle": "按月份翻阅", "noteCaption": "NOTE TO SELF" },
-  "article": { "eyebrow": "FIELD NOTES", "fallbackCategory": "学习笔记", "readingUnit": "分钟阅读", "draft": "草稿", "draftPreview": "草稿预览", "updated": "更新于", "back": "返回全部文章", "toc": "文章目录", "tocEyebrow": "ON THIS PAGE", "thanks": "感谢你读到这里。", "backTop": "回到顶部 ↑", "newer": "← 更新的记录", "older": "更早的记录 →", "copy": "复制代码", "copied": "已复制", "copyFailed": "复制失败，请手动选择", "expand": "展开完整代码 ↓", "collapse": "收起代码 ↑" },
-  "archive": { "totalPrefix": "共", "countUnit": "篇记录", "yearCountUnit": "篇", "all": "查看全部" },
-  "directory": { "all": "全部" },
-  "tags": { "title": "标签", "eyebrow": "TOPICS", "description": "从一个关键词，找到相关的记录。", "empty": "文章还没有设置标签。" },
-  "categories": { "title": "分类", "eyebrow": "COLLECTIONS", "description": "让不同方向的探索，各有归处。", "empty": "文章还没有设置分类。" },
-  "notFound": { "homeLink": "回到首页", "archiveLink": "翻阅归档" }
+  "header": {
+    "mark": "d",
+    "tagline": "个人博客"
+  },
+  "footer": {
+    "note": "NOTES, AT MY OWN PACE."
+  },
+  "home": {
+    "sheetTitle": "FIELD NOTES",
+    "artCaption": "THINK. EXPLORE. WRITE.",
+    "allPosts": "全部文章",
+    "friendsTitle": "友链",
+    "friendsDescription": "去朋友的地方坐坐",
+    "navigationTitle": "导航",
+    "navigationDescription": "收藏探索的入口"
+  },
+  "sidebar": {
+    "status": "保持好奇",
+    "postCount": "篇记录",
+    "startYear": "开始写作",
+    "aboutLink": "关于这个小站",
+    "archiveEyebrow": "BY THE MONTH",
+    "archiveTitle": "按月份翻阅",
+    "noteCaption": "NOTE TO SELF"
+  },
+  "article": {
+    "eyebrow": "FIELD NOTES",
+    "fallbackCategory": "学习笔记",
+    "readingUnit": "分钟阅读",
+    "draft": "草稿",
+    "draftPreview": "草稿预览",
+    "updated": "更新于",
+    "back": "返回全部文章",
+    "toc": "文章目录",
+    "tocEyebrow": "ON THIS PAGE",
+    "thanks": "感谢你读到这里。",
+    "backTop": "回到顶部 ↑",
+    "newer": "← 更新的记录",
+    "older": "更早的记录 →",
+    "copy": "复制代码",
+    "copied": "已复制",
+    "copyFailed": "复制失败，请手动选择",
+    "expand": "展开完整代码 ↓",
+    "collapse": "收起代码 ↑"
+  },
+  "archive": {
+    "totalPrefix": "共",
+    "countUnit": "篇记录",
+    "yearCountUnit": "篇",
+    "all": "查看全部"
+  },
+  "directory": {
+    "all": "全部"
+  },
+  "tags": {
+    "title": "标签",
+    "eyebrow": "TOPICS",
+    "description": "从一个关键词，找到相关的记录。",
+    "empty": "文章还没有设置标签。"
+  },
+  "categories": {
+    "title": "分类",
+    "eyebrow": "COLLECTIONS",
+    "description": "分门别类，各有千秋。",
+    "empty": "文章还没有设置分类。"
+  },
+  "notFound": {
+    "homeLink": "回到首页",
+    "archiveLink": "翻阅归档"
+  }
 }

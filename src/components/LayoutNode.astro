@@ -1,0 +1,21 @@
+---
+import {nodeProps,readBinding,safeUrl,type LayoutNode} from '../lib/layout-model.mjs';
+import PluginFrame from './PluginFrame.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Sidebar from './Sidebar.astro';
+import HeroArt from './layout/HeroArt.astro';
+import HomeModule from './layout/HomeModule.astro';
+import Icon from './Icon.astro';
+import PostSection from './layout/PostSection.astro';
+interface Props {node:LayoutNode;settings:any;posts?:any[];context?:any}
+const {node,settings,posts=[],context={}}=Astro.props;
+const props=nodeProps(node,settings);
+const attrs={'data-layout-node':node.id,'data-layout-type':node.type};
+if(props.className?.split(' ').includes('home-grid')){const side=node.children?.find(n=>n.type==='sidebar');if(!side||side.visible===false||(side.visible!==true&&side.when&&readBinding(settings,side.when)===false))props.className+=' without-sidebar';}
+if(node.props?.dynamicPageTitle&&context.dynamicTitle&&context.title)props.text=context.title;
+if(props.className?.split(' ').includes('article-grid')&&!context.showToc)props.className+=' no-toc';
+const Tag=props.tag??(node.type==='text'?'p':node.type==='link'?'a':'div');
+const show=true;
+---
+{show&&(node.type.startsWith('post-')?<PostSection kind={node.type} nodeAttrs={attrs} settings={settings} context={context}><slot/></PostSection>:node.type==='header'?<Header nodeAttrs={attrs} settings={settings}/>:node.type==='footer'?<Footer nodeAttrs={attrs} settings={settings}/>:node.type==='sidebar'?<Sidebar posts={posts} nodeAttrs={attrs} settings={settings}/>:node.type==='hero-art'?<HeroArt nodeAttrs={attrs} settings={settings}/>:['posts','explore'].includes(node.type)?<HomeModule nodeAttrs={attrs} settings={settings} posts={posts} kind={node.type}/>:node.type==='image'?<img {...attrs} class={props.className} src={safeUrl(props.src)?props.src:undefined} alt={props.alt??''} loading="lazy"/>:node.type==='content'?<div {...attrs} class={props.className}><slot/></div>:node.type==='plugin'?<PluginFrame instanceId={props.instanceId??''} nodeAttrs={attrs}/>:<Tag {...attrs} class={props.className} id={props.anchor} href={node.type==='link'&&safeUrl(props.href)?props.href:undefined} target={node.type==='link'&&props.newWindow?'_blank':undefined} rel={node.type==='link'&&props.newWindow?'noopener noreferrer':undefined}>{props.rule&&<span class="tiny-rule"/>}{props.text}{props.icon&&<Icon name="arrow" size={18}/>}{(node.children??[]).map(child=><Astro.self node={child} settings={settings} posts={posts} context={context}><slot/></Astro.self>)}</Tag>)}
